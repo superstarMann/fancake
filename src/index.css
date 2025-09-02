@@ -19,16 +19,16 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 220 13% 13%;
 
-    /* Primary coral/pink palette */
-    --primary: 342 65% 68%;
+    /* Warm red primary palette */
+    --primary: 0 85% 70%;
     --primary-foreground: 0 0% 100%;
-    --primary-light: 342 65% 85%;
-    --primary-glow: 342 65% 75%;
+    --primary-light: 0 85% 85%;
+    --primary-glow: 0 85% 75%;
 
-    /* Soft mint secondary */
-    --secondary: 158 45% 85%;
-    --secondary-foreground: 158 45% 25%;
-    --secondary-dark: 158 45% 65%;
+    /* Bright yellow secondary */
+    --secondary: 50 100% 70%;
+    --secondary-foreground: 50 100% 25%;
+    --secondary-dark: 50 100% 60%;
 
     /* Muted pastels */
     --muted: 220 14% 96%;
@@ -49,8 +49,8 @@ All colors MUST be HSL.
     --ring: 342 65% 68%;
 
     /* Custom design tokens */
-    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
-    --gradient-secondary: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--accent)));
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+    --gradient-secondary: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--primary-glow)));
     --gradient-subtle: linear-gradient(180deg, hsl(var(--background)), hsl(var(--muted)));
     
     /* Shadows */
