@@ -9,7 +9,7 @@ import {
   Mail,
   Instagram
 } from "lucide-react";
-import pancake from "@/assets/pancake-hero.jpg";
+import pancake from "/lovable-uploads/d7f1130a-687e-4908-9d75-cb89c9354dcd.png";
 
 export default function ProductHero() {
   const features = [
