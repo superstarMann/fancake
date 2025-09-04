@@ -1,6 +1,16 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
 import { 
   Droplet, 
   Zap, 
@@ -11,7 +21,32 @@ import {
 } from "lucide-react";
 import pancake from "/lovable-uploads/d7f1130a-687e-4908-9d75-cb89c9354dcd.png";
 
+const formSchema = z.object({
+  nickname: z.string().min(1, "별명을 입력해주세요"),
+  email: z.string().email("올바른 이메일을 입력해주세요"),
+  gender: z.string().optional(),
+  ageGroup: z.string().optional(),
+});
+
 export default function ProductHero() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      nickname: "",
+      email: "",
+      gender: "",
+      ageGroup: "",
+    },
+  });
+
+  const onSubmit = (values: z.infer<typeof formSchema>) => {
+    console.log(values);
+    setIsModalOpen(false);
+    form.reset();
+  };
+
   const features = [
     { icon: Droplet, text: "물조절 필요 없음" },
     { icon: Zap, text: "적은 칼로리, 부담 없는 한 끼" },
@@ -73,13 +108,121 @@ export default function ProductHero() {
                 </div>
               </div>
 
-              <Button 
-                variant="default" 
-                size="lg" 
-                className="w-full bg-primary hover:bg-primary/90"
-              >
-                구매하기 • ₩3,150
-              </Button>
+              <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+                <DialogTrigger asChild>
+                  <Button 
+                    variant="default" 
+                    size="lg" 
+                    className="w-full bg-primary hover:bg-primary/90"
+                  >
+                    구매하기 • ₩3,150
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-md border-4 border-gradient-primary bg-background">
+                  <DialogHeader>
+                    <DialogTitle className="text-center text-xl font-bold text-foreground">
+                      정보를 남겨주시면,<br />
+                      사장님이 직접 찾아가서 만들어줍니다 🥞
+                    </DialogTitle>
+                  </DialogHeader>
+                  
+                  <Form {...form}>
+                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 mt-4">
+                      <FormField
+                        control={form.control}
+                        name="nickname"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>별명 (필수)</FormLabel>
+                            <FormControl>
+                              <Input placeholder="별명을 입력하세요" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      
+                      <FormField
+                        control={form.control}
+                        name="email"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>이메일 (필수)</FormLabel>
+                            <FormControl>
+                              <Input type="email" placeholder="이메일을 입력하세요" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      
+                      <FormField
+                        control={form.control}
+                        name="gender"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>성별 (선택)</FormLabel>
+                            <FormControl>
+                              <RadioGroup 
+                                onValueChange={field.onChange} 
+                                value={field.value}
+                                className="flex flex-row space-x-4"
+                              >
+                                <div className="flex items-center space-x-2">
+                                  <RadioGroupItem value="male" id="male" />
+                                  <Label htmlFor="male">♂</Label>
+                                </div>
+                                <div className="flex items-center space-x-2">
+                                  <RadioGroupItem value="female" id="female" />
+                                  <Label htmlFor="female">♀</Label>
+                                </div>
+                                <div className="flex items-center space-x-2">
+                                  <RadioGroupItem value="other" id="other" />
+                                  <Label htmlFor="other">기타</Label>
+                                </div>
+                              </RadioGroup>
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      
+                      <FormField
+                        control={form.control}
+                        name="ageGroup"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>연령대 (선택)</FormLabel>
+                            <Select onValueChange={field.onChange} value={field.value}>
+                              <FormControl>
+                                <SelectTrigger>
+                                  <SelectValue placeholder="연령대를 선택하세요" />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent>
+                                <SelectItem value="teens">10대</SelectItem>
+                                <SelectItem value="twenties">20대</SelectItem>
+                                <SelectItem value="thirties">30대</SelectItem>
+                                <SelectItem value="forties">40대</SelectItem>
+                                <SelectItem value="fifties">50대</SelectItem>
+                                <SelectItem value="sixties-plus">60대 이상</SelectItem>
+                              </SelectContent>
+                            </Select>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      
+                      <Button 
+                        type="submit" 
+                        className="w-full bg-primary hover:bg-primary/90 mt-6"
+                      >
+                        제출하기
+                      </Button>
+                    </form>
+                  </Form>
+                </DialogContent>
+              </Dialog>
             </Card>
 
             {/* Contact Info */}
