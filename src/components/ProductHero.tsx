@@ -25,8 +25,8 @@ export default function ProductHero() {
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           
           {/* Product Image */}
-          <div className="relative order-2 lg:order-1">
-            <div className="relative overflow-hidden rounded-3xl shadow-elegant animate-float">
+          <div className="relative order-1 lg:order-1">
+            <div className="relative overflow-hidden rounded-3xl shadow-elegant">
               <img 
                 src={pancake} 
                 alt="간편 팬케이크 믹스 제품 사진"
@@ -42,7 +42,7 @@ export default function ProductHero() {
           </div>
 
           {/* Product Details */}
-          <div className="order-1 lg:order-2 space-y-8">
+          <div className="order-2 lg:order-2 space-y-8">
             <div className="space-y-4">
               <h1 className="text-4xl lg:text-6xl font-bold text-foreground leading-tight">
                 간편 팬케이크
