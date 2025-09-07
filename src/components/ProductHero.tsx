@@ -121,10 +121,10 @@ export default function ProductHero() {
           <div className="order-2 lg:order-2 space-y-8">
             <div className="space-y-4">
               <h1 className="font-noto-kr text-center space-y-2">
-                <div className="text-[38px] font-bold text-foreground leading-tight">
+                <div className="text-[38px] font-bold text-accent-pink leading-tight">
                   간편 핫케이크 믹스
                 </div>
-                <div className="text-[20px] font-normal text-muted-light">
+                <div className="text-[20px] font-normal text-accent-pink-light">
                   1인용으로 딱 맞는 한 끼
                 </div>
               </h1>
