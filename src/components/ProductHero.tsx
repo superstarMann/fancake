@@ -120,9 +120,13 @@ export default function ProductHero() {
           {/* Product Details */}
           <div className="order-2 lg:order-2 space-y-8">
             <div className="space-y-4">
-              <h1 className="text-4xl lg:text-6xl font-bold text-foreground leading-tight">
-                간편 핫케이크 믹스
-                <span className="block text-primary">1인용으로 딱 맞는 한 끼</span>
+              <h1 className="font-noto-kr text-center space-y-2">
+                <div className="text-[38px] font-bold text-foreground leading-tight">
+                  간편 핫케이크 믹스
+                </div>
+                <div className="text-[20px] font-normal text-muted-light">
+                  1인용으로 딱 맞는 한 끼
+                </div>
               </h1>
               <p className="text-xl text-muted-foreground leading-relaxed">
                 물 조절 필요 없이, 나만을 위한 딱 맞는 양.<br />
