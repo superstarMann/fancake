@@ -69,6 +69,11 @@ export default function ProductHero() {
         });
         setIsModalOpen(false);
         form.reset();
+        
+        // Redirect after 3 seconds
+        setTimeout(() => {
+          window.location.href = 'https://orimeopda.github.io/thankyou.html';
+        }, 3000);
       } else {
         throw new Error('Failed to submit');
       }
@@ -251,7 +256,7 @@ export default function ProductHero() {
                       
                       <Button 
                         type="submit" 
-                        className="w-full bg-primary hover:bg-primary/90 mt-6"
+                        className="w-full mt-6 bg-gradient-to-r from-[#FF6B6B] to-[#FFD93D] hover:from-[#FF5252] hover:to-[#FFC107] text-white font-semibold transition-all duration-300"
                         disabled={isSubmitting}
                       >
                         {isSubmitting ? "제출 중..." : "제출하기"}
