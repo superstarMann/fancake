@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
@@ -30,6 +31,8 @@ const formSchema = z.object({
 
 export default function ProductHero() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
   
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -41,10 +44,43 @@ export default function ProductHero() {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
-    setIsModalOpen(false);
-    form.reset();
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    setIsSubmitting(true);
+    
+    try {
+      const formData = new FormData();
+      formData.append('nickname', values.nickname);
+      formData.append('email', values.email);
+      if (values.gender) formData.append('gender', values.gender);
+      if (values.ageGroup) formData.append('ageGroup', values.ageGroup);
+
+      const response = await fetch('https://formspree.io/f/mzzakakz', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        toast({
+          title: "제출이 완료되었습니다! 🎉",
+          description: "사장님이 직접 찾아가서 만들어줍니다 🥞",
+        });
+        setIsModalOpen(false);
+        form.reset();
+      } else {
+        throw new Error('Failed to submit');
+      }
+    } catch (error) {
+      toast({
+        title: "제출 실패",
+        description: "다시 시도해주세요.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const features = [
@@ -216,8 +252,9 @@ export default function ProductHero() {
                       <Button 
                         type="submit" 
                         className="w-full bg-primary hover:bg-primary/90 mt-6"
+                        disabled={isSubmitting}
                       >
-                        제출하기
+                        {isSubmitting ? "제출 중..." : "제출하기"}
                       </Button>
                     </form>
                   </Form>
