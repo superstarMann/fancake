@@ -105,7 +105,7 @@ export default function ProductHero() {
             <div className="relative overflow-hidden rounded-3xl shadow-elegant">
               <img 
                 src={pancake} 
-                alt="간편 팬케이크 믹스 제품 사진"
+                alt="간편 핫케이크 믹스 제품 사진"
                 className="w-full h-auto object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300" />
@@ -121,12 +121,12 @@ export default function ProductHero() {
           <div className="order-2 lg:order-2 space-y-8">
             <div className="space-y-4">
               <h1 className="text-4xl lg:text-6xl font-bold text-foreground leading-tight">
-                간편 팬케이크
-                <span className="block text-primary">1인용 팬케이크 믹스</span>
+                간편 핫케이크
+                <span className="block text-primary">1인용 핫케이크 믹스</span>
               </h1>
               <p className="text-xl text-muted-foreground leading-relaxed">
                 물 조절 필요 없이, 나만을 위한 딱 맞는 양.<br />
-                간편하게 즐기는 1인 전용 팬케이크.
+                간편하게 즐기는 1인 전용 핫케이크.
               </p>
             </div>
 
@@ -145,7 +145,7 @@ export default function ProductHero() {
               <div className="space-y-4">
                 <div className="text-center space-y-2">
                   <p className="text-3xl font-bold text-primary">₩3,150</p>
-                  <p className="text-sm text-muted-foreground">1인용 팬케이크 믹스</p>
+                  <p className="text-sm text-muted-foreground">1인용 핫케이크 믹스</p>
                 </div>
               </div>
 
