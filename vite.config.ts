@@ -1,5 +1,3 @@
-import { webcrypto } from "crypto";
-(globalThis as any).crypto = webcrypto;
 import { defineConfig, ConfigEnv } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
